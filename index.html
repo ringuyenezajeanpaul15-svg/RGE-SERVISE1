@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RGE Services | Electrical & Electronics Engineering Platform</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+    .hidden-section { display: none; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+  <!-- TOP NAVIGATION BAR -->
+  <header class="bg-slate-900 text-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
+      
+      <!-- RGE Services Logo -->
+      <div class="flex items-center gap-3 cursor-pointer" onclick="navigate('home')">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-amber-400 to-orange-600 flex items-center justify-center shadow-md">
+          <svg class="w-7 h-7 text-slate-900" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/>
+          </svg>
+        </div>
+        <div>
+          <span class="text-xl font-extrabold tracking-wide text-white">RGE <span class="text-amber-400">SERVICES</span></span>
+          <p class="text-[11px] text-slate-400 uppercase tracking-widest">Electrical & Electronics</p>
+        </div>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav id="main-nav" class="flex flex-wrap items-center gap-2 sm:gap-5 text-sm font-medium">
+        <button onclick="navigate('home')" class="hover:text-amber-400 transition px-2 py-1">Home</button>
+        <button onclick="navigate('services')" class="hover:text-amber-400 transition px-2 py-1">Services</button>
+        <button onclick="navigate('customers')" class="hover:text-amber-400 transition px-2 py-1">Customers Page</button>
+        <button onclick="navigate('technicians')" class="hover:text-amber-400 transition px-2 py-1">Technicians Page</button>
+        <button id="nav-admin-btn" onclick="navigate('admin')" class="hidden bg-slate-800 border border-amber-500/40 text-amber-400 hover:bg-amber-500 hover:text-slate-900 transition px-3 py-1 rounded-lg text-xs">
+          <i class="fa-solid fa-shield-halved mr-1"></i> Owner Dispatch
+        </button>
+      </nav>
+
+      <!-- Auth Status -->
+      <div id="auth-status" class="flex items-center gap-3">
+        <button onclick="openAuthModal('login')" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-1.5 rounded-lg text-sm transition">
+          Login
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-8">
+
+    <!-- 1. HOME / LANDING SECTION -->
+    <section id="sec-home" class="space-y-10">
+      <div class="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 rounded-2xl p-8 md:p-12 text-white shadow-xl border border-slate-700">
+        <div class="max-w-3xl">
+          <span class="inline-block bg-amber-500/20 text-amber-300 border border-amber-400/30 text-xs font-semibold px-3 py-1 rounded-full mb-4">
+            <i class="fa-solid fa-bolt mr-1"></i> Professional Engineering & Dispatch Network
+          </span>
+          <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-4">
+            Welcome to <span class="text-amber-400">RGE Services</span>
+          </h1>
+          <p class="text-slate-300 text-base md:text-lg leading-relaxed mb-6">
+            This platform is divided into two parts: one for <strong>Customers</strong> who need electrical, electronics, CCTV, or engineering installations, and one for verified <strong>Electricians & Technicians</strong> ready to perform jobs in their local district.
+          </p>
+
+          <!-- Dual Portal Entry Buttons -->
+          <div class="grid sm:grid-cols-2 gap-4 mb-6">
+            <button onclick="openAuthModal('register-customer')" class="flex items-center justify-between bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold p-4 rounded-xl shadow-lg transition group">
+              <div class="text-left">
+                <div class="text-xs uppercase tracking-wider opacity-80">Part 1: Customer Portal</div>
+                <div class="text-base">If you're a Customer, Tap Here to Create Account</div>
+              </div>
+              <i class="fa-solid fa-arrow-right text-lg group-hover:translate-x-1 transition"></i>
+            </button>
+
+            <button onclick="openAuthModal('register-tech')" class="flex items-center justify-between bg-slate-700 hover:bg-slate-600 text-white border border-slate-500 font-bold p-4 rounded-xl shadow-lg transition group">
+              <div class="text-left">
+                <div class="text-xs uppercase tracking-wider text-amber-400">Part 2: Electrician Portal</div>
+                <div class="text-base">If you're a Technician, Tap Here to Create Account</div>
+              </div>
+              <i class="fa-solid fa-screwdriver-wrench text-lg text-amber-400 group-hover:rotate-12 transition"></i>
+            </button>
+          </div>
+
+          <!-- Social Media & Electrician WhatsApp Channel -->
+          <div class="flex flex-wrap items-center gap-4 pt-4 border-t border-slate-700/80 text-sm">
+            <a href="https://whatsapp.com/channel/0029VbDwSKM3rZZc785CO02D" target="_blank" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-4 py-2 rounded-lg transition">
+              <i class="fa-brands fa-whatsapp text-lg"></i> Follow ELECTRICAL & ELECTRONICS SERVICES Channel
+            </a>
+            <a href="https://www.instagram.com/ringuyeneza__?xtok=NTlpemkyOTI5eHQz" target="_blank" class="inline-flex items-center gap-2 bg-pink-600 hover:bg-pink-500 text-white font-semibold px-4 py-2 rounded-lg transition">
+              <i class="fa-brands fa-instagram text-lg"></i> Instagram (@ringuyeneza__)
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Community Stats -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex items-center gap-4">
+          <div class="w-12 h-12 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center text-xl">
+            <i class="fa-solid fa-users"></i>
+          </div>
+          <div>
+            <p class="text-sm text-slate-500 font-medium">Joined Customers</p>
+            <p id="stat-customers" class="text-2xl font-extrabold text-slate-900">0</p>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex items-center gap-4">
+          <div class="w-12 h-12 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center text-xl">
+            <i class="fa-solid fa-helmet-safety"></i>
+          </div>
+          <div>
+            <p class="text-sm text-slate-500 font-medium">Verified Technicians</p>
+            <p id="stat-techs" class="text-2xl font-extrabold text-slate-900">0</p>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex items-center gap-4">
+          <div class="w-12 h-12 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl">
+            <i class="fa-solid fa-phone-volume"></i>
+          </div>
+          <div>
+            <p class="text-sm text-slate-500 font-medium">Direct Dispatch Lines</p>
+            <p class="text-sm font-bold text-slate-800">0785948517 / 0733535358 / 0795916277</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Featured Services -->
+      <div class="flex items-center justify-between">
+        <h2 class="text-2xl font-bold text-slate-900">Featured Services</h2>
+        <button onclick="navigate('services')" class="text-amber-600 hover:text-amber-700 font-semibold text-sm">
+          Explore All Services & Costs &rarr;
+        </button>
+      </div>
+      <div id="home-services-preview" class="grid md:grid-cols-3 gap-6"></div>
+    </section>
+
+    <!-- 2. SERVICES CATALOG SECTION -->
+    <section id="sec-services" class="hidden-section space-y-6">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+        <div>
+          <h2 class="text-2xl font-extrabold text-slate-900">All Services & Estimated Costs</h2>
+          <p class="text-sm text-slate-500">Tap <strong>"Tap Here to Apply"</strong> on any service to fill in your location details and send via WhatsApp.</p>
+        </div>
+        <div class="relative w-full md:w-72">
+          <i class="fa-solid fa-search absolute left-3 top-3 text-slate-400"></i>
+          <input type="text" id="service-search" onkeyup="renderServices()" placeholder="Search service..." class="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 outline-none" />
+        </div>
+      </div>
+
+      <div id="services-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </section>
+
+    <!-- 3. CUSTOMERS PAGE (STRICTLY PRIVACY PROTECTED) -->
+    <section id="sec-customers" class="hidden-section space-y-6">
+      <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+        <h2 class="text-2xl font-extrabold text-slate-900">Joined Customers List</h2>
+        <p class="text-sm text-slate-500">
+          Total Customers Joined: <strong id="cust-page-count" class="text-slate-900">0</strong>. 
+          <span class="text-amber-600 font-medium"><i class="fa-solid fa-lock mr-1"></i> Privacy Active: Only names and profile pictures are shown.</span>
+        </p>
+      </div>
+      <div id="customers-list-grid" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5"></div>
+    </section>
+
+    <!-- 4. TECHNICIANS PAGE (STRICTLY PRIVACY PROTECTED) -->
+    <section id="sec-technicians" class="hidden-section space-y-6">
+      <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <h2 class="text-2xl font-extrabold text-slate-900">Registered Technicians</h2>
+          <p class="text-sm text-slate-500">
+            <i class="fa-solid fa-lock text-amber-600 mr-1"></i> Privacy Active: Only technician names and profile pictures are displayed. Phone numbers and locations are strictly private to RGE Admin.
+          </p>
+        </div>
+        <a href="https://whatsapp.com/channel/0029VbDwSKM3rZZc785CO02D" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-4 py-2.5 rounded-lg transition">
+          <i class="fa-brands fa-whatsapp mr-1"></i> Join Electricians WhatsApp Channel
+        </a>
+      </div>
+      <div id="technicians-list-grid" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5"></div>
+    </section>
+
+    <!-- 5. OWNER ADMIN DISPATCH DASHBOARD -->
+    <section id="sec-admin" class="hidden-section space-y-6">
+      <div class="bg-slate-900 text-white p-6 rounded-xl shadow-md border border-amber-500/40 flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <span class="text-xs uppercase tracking-wider text-amber-400 font-bold">Owner-Only Dispatch Control</span>
+          <h2 class="text-2xl font-extrabold">Full Technician & Customer Directory</h2>
+          <p class="text-sm text-slate-300 mt-1">Filter technicians by district (e.g., Huye, Gasabo) to match incoming WhatsApp service requests.</p>
+        </div>
+        <input type="text" id="admin-district-filter" onkeyup="filterAdminTechs()" placeholder="Filter by District (e.g. Huye)..." class="bg-slate-800 border border-slate-600 text-white px-4 py-2 rounded-lg text-sm outline-none focus:border-amber-400" />
+      </div>
+
+      <!-- Technicians Table -->
+      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto">
+        <div class="p-4 border-b border-slate-200 font-bold text-slate-800">All Registered Technicians</div>
+        <table class="w-full text-left text-sm">
+          <thead class="bg-slate-100 text-slate-600 uppercase text-xs">
+            <tr>
+              <th class="p-3">Name</th>
+              <th class="p-3">Telephone</th>
+              <th class="p-3">Province / District</th>
+              <th class="p-3">Sector / Village Details</th>
+              <th class="p-3">Skill Level</th>
+              <th class="p-3">Languages</th>
+            </tr>
+          </thead>
+          <tbody id="admin-tech-table" class="divide-y divide-slate-200"></tbody>
+        </table>
+      </div>
+
+      <!-- Service Applications Log -->
+      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-x-auto">
+        <div class="p-4 border-b border-slate-200 font-bold text-slate-800">Recent Customer Service Applications</div>
+        <table class="w-full text-left text-sm">
+          <thead class="bg-slate-100 text-slate-600 uppercase text-xs">
+            <tr>
+              <th class="p-3">Service</th>
+              <th class="p-3">Customer</th>
+              <th class="p-3">Telephone</th>
+              <th class="p-3">Location</th>
+              <th class="p-3">Description</th>
+            </tr>
+          </thead>
+          <tbody id="admin-requests-table" class="divide-y divide-slate-200"></tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL 1: LOGIN, SIGN-UP & FREE VERIFICATION CODE -->
+  <div id="auth-modal" class="fixed inset-0 bg-slate-950/75 hidden items-center justify-center z-50 p-4 overflow-y-auto">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative my-8">
+      <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-xl">&times;</button>
+      
+      <div class="flex gap-2 mb-6 bg-slate-100 p-1 rounded-xl text-xs font-bold">
+        <button id="tab-login" onclick="switchAuthTab('login')" class="flex-1 py-2 rounded-lg transition">Login</button>
+        <button id="tab-cust" onclick="switchAuthTab('register-customer')" class="flex-1 py-2 rounded-lg transition">Customer Sign-Up</button>
+        <button id="tab-tech" onclick="switchAuthTab('register-tech')" class="flex-1 py-2 rounded-lg transition">Technician Sign-Up</button>
+      </div>
+
+      <!-- LOGIN FORM -->
+      <form id="form-login" onsubmit="handleLogin(event)" class="space-y-4">
+        <h3 class="text-xl font-extrabold text-slate-900">Login to RGE Services</h3>
+        <div>
+          <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Phone Number</label>
+          <input type="tel" id="login-tel" required placeholder="078XXXXXXX" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm" />
+        </div>
+        <div>
+          <label class="block text-xs font-bold uppercase text-slate-600 mb-1">8-Digit Password</label>
+          <input type="password" id="login-pass" required maxlength="8" minlength="8" placeholder="8-digit password" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm" />
+        </div>
+        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-2.5 rounded-lg transition">Login</button>
+      </form>
+
+      <!-- CUSTOMER SIGN-UP -->
+      <form id="form-register-customer" onsubmit="handleRequestOTP(event, 'customer')" class="space-y-4 hidden">
+        <h3 class="text-xl font-extrabold text-slate-900">Create Customer Account</h3>
+        <div>
+          <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Full Name</label>
+          <input type="text" id="cust-name" required placeholder="Enter full name" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm" />
+        </div>
+        <div>
+          <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Telephone Number</label>
+          <input type="tel" id="cust-tel" required placeholder="078XXXXXXX" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm" />
+        </div>
+        <div>
+          <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Password (8 Digits/Characters)</label>
+          <input type="password" id="cust-pass" required maxlength="8" minlength="8" pattern=".{8,8}" placeholder="Exactly 8 characters" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm" />
+        </div>
+        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-2.5 rounded-lg transition">Get Verification Code</button>
+      </form>
+
+      <!-- TECHNICIAN SIGN-UP -->
+      <form id="form-register-tech" onsubmit="handleRequestOTP(event, 'technician')" class="space-y-3 hidden">
+        <h3 class="text-xl font-extrabold text-slate-900">Create Electrician / Technician Account</h3>
+        <div class="grid sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Full Name</label>
+            <input type="text" id="tech-name" required placeholder="Full name" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Telephone Number</label>
+            <input type="tel" id="tech-tel" required placeholder="078XXXXXXX" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm" />
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">8-Digit Password</label>
+            <input type="password" id="tech-pass" required maxlength="8" minlength="8" pattern=".{8,8}" placeholder="8-digit password" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Skill / Student Level</label>
+            <select id="tech-level" required class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm">
+              <option value="TVET Level 3">TVET Level 3</option>
+              <option value="TVET Level 4">TVET Level 4</option>
+              <option value="TVET Level 5 (A2)">TVET Level 5 (A2)</option>
+              <option value="Advanced Diploma (A1)">Advanced Diploma (A1)</option>
+              <option value="Bachelor's Degree (A0)">Bachelor's Degree (A0)</option>
+              <option value="Master Technician">Master Technician</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Province</label>
+            <select id="tech-province" required class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm">
+              <option value="Kigali City">Kigali City</option>
+              <option value="Southern Province">Southern Province</option>
+              <option value="Northern Province">Northern Province</option>
+              <option value="Eastern Province">Eastern Province</option>
+              <option value="Western Province">Western Province</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">District</label>
+            <input type="text" id="tech-district" required placeholder="e.g. Huye, Gasabo" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Sector, Village & Location Description</label>
+          <input type="text" id="tech-location-desc" required placeholder="Sector, Cell, Village, or landmark" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Languages Spoken</label>
+          <div class="flex flex-wrap gap-4 text-sm pt-1">
+            <label class="flex items-center gap-1.5"><input type="checkbox" name="tech-lang" value="Kinyarwanda" checked /> Kinyarwanda</label>
+            <label class="flex items-center gap-1.5"><input type="checkbox" name="tech-lang" value="English" /> English</label>
+            <label class="flex items-center gap-1.5"><input type="checkbox" name="tech-lang" value="French" /> French</label>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Profile Picture (Optional)</label>
+          <input type="file" id="tech-photo" accept="image/*" class="w-full text-xs text-slate-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:bg-slate-100 file:font-semibold" />
+        </div>
+
+        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-2.5 rounded-lg transition">Get Verification Code</button>
+      </form>
+
+      <!-- FREE VERIFICATION CODE BOX -->
+      <div id="otp-verification-box" class="hidden space-y-4">
+        <div class="bg-emerald-50 border border-emerald-300 text-emerald-900 p-4 rounded-xl text-sm">
+          <p class="font-bold"><i class="fa-solid fa-shield-check mr-1"></i> Phone Number Verification</p>
+          <p class="mt-1">Your 6-digit verification code for <strong id="otp-target-phone"></strong> is:</p>
+          <div id="otp-display-code" class="text-2xl font-mono font-extrabold tracking-widest text-center bg-white border border-emerald-400 rounded-lg py-2 my-2 text-slate-900">
+            ------
+          </div>
+          <p class="text-xs text-emerald-700">Type this 6-digit code below to verify and complete your account.</p>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Enter 6-Digit Verification Code</label>
+          <input type="text" id="otp-input" maxlength="6" placeholder="123456" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-center font-mono text-lg tracking-widest" />
+        </div>
+
+        <button type="button" onclick="completeAccountCreation()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-lg transition">
+          Verify & Create Account
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 2: SERVICE APPLICATION & WHATSAPP DISPATCH -->
+  <div id="apply-modal" class="fixed inset-0 bg-slate-950/75 hidden items-center justify-center z-50 p-4 overflow-y-auto">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl relative my-8">
+      <button onclick="closeApplyModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-xl">&times;</button>
+      
+      <span class="text-xs font-bold uppercase tracking-wider text-amber-600">Service Application</span>
+      <h3 id="apply-service-title" class="text-xl font-extrabold text-slate-900 mb-1">Apply for Service</h3>
+      <p id="apply-service-cost" class="text-sm font-semibold text-emerald-700 mb-4"></p>
+
+      <form id="service-apply-form" onsubmit="submitAndSendWhatsApp(event)" class="space-y-3">
+        <div class="grid sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Your Name</label>
+            <input type="text" id="app-name" required placeholder="Full name" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Telephone</label>
+            <input type="tel" id="app-tel" required placeholder="078XXXXXXX" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm" />
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Province / District</label>
+            <input type="text" id="app-district" required placeholder="e.g. Southern / Huye" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Sector</label>
+            <input type="text" id="app-sector" required placeholder="Sector name" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Village & Location Description</label>
+          <input type="text" id="app-village" required placeholder="Village & nearby landmark so technician locates you well" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Other Description</label>
+          <textarea id="app-desc" rows="3" required placeholder="Explain the work needed..." class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm"></textarea>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Send Through WhatsApp Number</label>
+          <select id="app-whatsapp-target" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm font-semibold bg-emerald-50">
+            <option value="250785948517">0785948517 (Primary WhatsApp)</option>
+            <option value="250733535358">0733535358 (WhatsApp Line 2)</option>
+            <option value="250795916277">0795916277 (WhatsApp Line 3)</option>
+          </select>
+        </div>
+
+        <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl shadow-md transition flex items-center justify-center gap-2">
+          <i class="fa-brands fa-whatsapp text-xl"></i> Send Request via WhatsApp
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-900 text-slate-400 text-sm py-6 mt-12 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p>&copy; 2026 <strong>RGE Services</strong>. All Rights Reserved.</p>
+      <div class="flex items-center gap-4">
+        <a href="https://whatsapp.com/channel/0029VbDwSKM3rZZc785CO02D" target="_blank" class="hover:text-emerald-400 transition">WhatsApp Channel</a>
+        <a href="https://www.instagram.com/ringuyeneza__?xtok=NTlpemkyOTI5eHQz" target="_blank" class="hover:text-pink-400 transition">Instagram</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- EMBEDDED APPLICATION JAVASCRIPT -->
+  <script>
+    const servicesData = [
+      { id: 1, title: "Maintenance & Electrical Repair", cost: "10,000 – 30,000 RWF", icon: "fa-screwdriver-wrench", desc: "Fault troubleshooting, circuit breaker replacement, socket/switch repair, and power diagnostics." },
+      { id: 2, title: "Domestic Installation", cost: "80,000 – 350,000+ RWF", icon: "fa-house-chimney-crack", desc: "Complete residential house wiring, distribution board (DB) installation, lighting, and earthing." },
+      { id: 3, title: "Industrial Installation", cost: "300,000 – 1,500,000+ RWF", icon: "fa-industry", desc: "3-phase power systems, heavy machinery control panels, motor starters, and industrial lighting." },
+      { id: 4, title: "CCTV & Security Camera Installation", cost: "50,000 – 250,000+ RWF", icon: "fa-video", desc: "HD/IP security camera installation, DVR/NVR setup, structured cabling, and mobile remote viewing." },
+      { id: 5, title: "Building Game & Entertainment Setup", cost: "100,000 – 500,000+ RWF", icon: "fa-gamepad", desc: "Custom gaming center electrical wiring, LED ambient lighting, console stations, and sound systems." },
+      { id: 6, title: "Helping New Customer Generate New Project", cost: "25,000 – 100,000 RWF", icon: "fa-lightbulb", desc: "Technical consultation, site survey, load calculation, electrical schematics, and Bill of Quantities (BoQ)." },
+      { id: 7, title: "Building Custom Electronics Project", cost: "50,000 – 400,000+ RWF", icon: "fa-microchip", desc: "Custom circuit design, microcontroller/PLC automation, solar/inverter systems, and engineering prototypes." },
+      { id: 8, title: "Technical Training & Mentorship", cost: "30,000 – 100,000 RWF", icon: "fa-graduation-cap", desc: "Hands-on practical training in domestic/industrial wiring and electronics for students and beginners." }
+    ];
+
+    let authToken = localStorage.getItem('rge_token') || null;
+    let currentUser = JSON.parse(localStorage.getItem('rge_user')) || null;
+    let pendingRegistrationData = null;
+    let selectedService = null;
+    let cachedAdminTechs = [];
+
+    function navigate(sectionId) {
+      if ((sectionId === 'customers' || sectionId === 'technicians') && !authToken) {
+        alert('Please login or create an account first to view this page.');
+        openAuthModal('login');
+        return;
+      }
+
+      document.querySelectorAll('main > section').forEach(sec => sec.classList.add('hidden-section'));
+      document.getElementById('sec-' + sectionId).classList.remove('hidden-section');
+
+      if (sectionId === 'services') renderServices();
+      if (sectionId === 'customers') loadProtectedDirectory('customer');
+      if (sectionId === 'technicians') loadProtectedDirectory('technician');
+      if (sectionId === 'admin') loadAdminDashboard();
+    }
+
+    async function loadStats() {
+      try {
+        const res = await fetch('/api/stats');
+        const data = await res.json();
+        document.getElementById('stat-customers').innerText = data.customers ?? 0;
+        document.getElementById('stat-techs').innerText = data.technicians ?? 0;
+      } catch (err) {
+        console.error('Stats error:', err);
+      }
+    }
+
+    function renderServices() {
+      const query = (document.getElementById('service-search')?.value || '').toLowerCase();
+      const filtered = servicesData.filter(s => s.title.toLowerCase().includes(query) || s.desc.toLowerCase().includes(query));
+
+      document.getElementById('services-grid').innerHTML = filtered.map(s => `
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl mb-4">
+              <i class="fa-solid ${s.icon}"></i>
+            </div>
+            <h3 class="text-lg font-extrabold text-slate-900 mb-2">${s.title}</h3>
+            <p class="text-sm text-slate-600 mb-4 leading-relaxed">${s.desc}</p>
+          </div>
+          <div class="pt-4 border-t border-slate-100">
+            <div class="text-xs text-slate-400 uppercase font-bold">Estimated Cost</div>
+            <div class="text-base font-extrabold text-emerald-700 mb-4">${s.cost}</div>
+            <button onclick="openApplyModal(${s.id})" class="w-full bg-slate-900 hover:bg-amber-500 hover:text-slate-950 text-white font-bold py-2.5 rounded-xl text-sm transition">
+              Tap Here to Apply
+            </button>
+          </div>
+        </div>
+      `).join('');
+
+      document.getElementById('home-services-preview').innerHTML = servicesData.slice(0, 3).map(s => `
+        <div class="bg-white rounded-xl border border-slate-200 p-5 shadow-sm">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-10 h-10 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center"><i class="fa-solid ${s.icon}"></i></div>
+            <h4 class="font-bold text-slate-900 text-sm">${s.title}</h4>
+          </div>
+          <p class="text-xs text-slate-500 mb-3">${s.desc}</p>
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-extrabold text-emerald-700">${s.cost}</span>
+            <button onclick="openApplyModal(${s.id})" class="text-xs bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-3 py-1.5 rounded-lg">Tap Here to Apply</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    async function loadProtectedDirectory(role) {
+      try {
+        const res = await fetch(`/api/directory/${role}`, {
+          headers: { 'Authorization': `Bearer ${authToken}` }
+        });
+        const list = await res.json();
+        if (!res.ok) return alert(list.error || 'Access denied');
+
+        if (role === 'customer') {
+          document.getElementById('cust-page-count').innerText = list.length;
+          document.getElementById('customers-list-grid').innerHTML = list.map(c => `
+            <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex items-center gap-4">
+              <img src="${c.photo_url || 'https://ui-avatars.com/api/?background=0f172a&color=fbbf24&name=' + encodeURIComponent(c.full_name)}" class="w-14 h-14 rounded-full object-cover border-2 border-amber-400" />
+              <div>
+                <h4 class="font-bold text-slate-900">${c.full_name}</h4>
+                <span class="text-xs text-slate-400">RGE Customer</span>
+              </div>
+            </div>
+          `).join('');
+        } else {
+          document.getElementById('technicians-list-grid').innerHTML = list.map(t => `
+            <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex items-center gap-4">
+              <img src="${t.photo_url || 'https://ui-avatars.com/api/?background=f59e0b&color=0f172a&name=' + encodeURIComponent(t.full_name)}" class="w-14 h-14 rounded-full object-cover border-2 border-slate-900" />
+              <div>
+                <h4 class="font-bold text-slate-900">${t.full_name}</h4>
+                <span class="text-xs text-emerald-600 font-semibold"><i class="fa-solid fa-circle-check mr-1"></i>Verified Technician</span>
+              </div>
+            </div>
+          `).join('');
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    async function loadAdminDashboard() {
+      try {
+        const res = await fetch('/api/admin/all-data', {
+          headers: { 'Authorization': `Bearer ${authToken}` }
+        });
+        const data = await res.json();
+        if (!res.ok) return alert(data.error || 'Owner access only.');
+
+        cachedAdminTechs = data.technicians;
+        renderAdminTechTable(cachedAdminTechs);
+
+        document.getElementById('admin-requests-table').innerHTML = data.requests.map(r => `
+          <tr class="hover:bg-slate-50">
+            <td class="p-3 font-bold text-slate-900">${r.service_name}</td>
+            <td class="p-3">${r.customer_name}</td>
+            <td class="p-3 font-mono text-blue-700 font-semibold">${r.customer_phone}</td>
+            <td class="p-3">${r.province_district} (${r.sector} - ${r.village_details})</td>
+            <td class="p-3 text-slate-600">${r.description}</td>
+          </tr>
+        `).join('');
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    function filterAdminTechs() {
+      const q = document.getElementById('admin-district-filter').value.toLowerCase();
+      const filtered = cachedAdminTechs.filter(t =>
+        (t.district || '').toLowerCase().includes(q) ||
+        (t.province || '').toLowerCase().includes(q) ||
+        (t.full_name || '').toLowerCase().includes(q)
+      );
+      renderAdminTechTable(filtered);
+    }
+
+    function renderAdminTechTable(techs) {
+      document.getElementById('admin-tech-table').innerHTML = techs.map(t => `
+        <tr class="hover:bg-slate-50">
+          <td class="p-3 font-bold text-slate-900">${t.full_name}</td>
+          <td class="p-3 font-mono text-blue-700 font-semibold">${t.phone}</td>
+          <td class="p-3">${t.province} — <strong>${t.district}</strong></td>
+          <td class="p-3 text-slate-600">${t.location_desc}</td>
+          <td class="p-3"><span class="bg-amber-100 text-amber-800 px-2 py-0.5 rounded text-xs font-bold">${t.skill_level}</span></td>
+          <td class="p-3 text-xs">${(t.languages || []).join(', ')}</td>
+        </tr>
+      `).join('');
+    }
+
+    function openAuthModal(tab) {
+      document.getElementById('auth-modal').classList.remove('hidden');
+      document.getElementById('auth-modal').classList.add('flex');
+      switchAuthTab(tab);
+    }
+
+    function closeAuthModal() {
+      document.getElementById('auth-modal').classList.add('hidden');
+      document.getElementById('auth-modal').classList.remove('flex');
+      document.getElementById('otp-verification-box').classList.add('hidden');
+    }
+
+    function switchAuthTab(tab) {
+      ['form-login', 'form-register-customer', 'form-register-tech', 'otp-verification-box'].forEach(id => {
+        document.getElementById(id).classList.add('hidden');
+      });
+      ['tab-login', 'tab-cust', 'tab-tech'].forEach(id => {
+        document.getElementById(id).classList.remove('bg-white', 'shadow', 'text-slate-900');
+      });
+
+      if (tab === 'login') {
+        document.getElementById('form-login').classList.remove('hidden');
+        document.getElementById('tab-login').classList.add('bg-white', 'shadow', 'text-slate-900');
+      } else if (tab === 'register-customer') {
+        document.getElementById('form-register-customer').classList.remove('hidden');
+        document.getElementById('tab-cust').classList.add('bg-white', 'shadow', 'text-slate-900');
+      } else if (tab === 'register-tech') {
+        document.getElementById('form-register-tech').classList.remove('hidden');
+        document.getElementById('tab-tech').classList.add('bg-white', 'shadow', 'text-slate-900');
+      }
+    }
+
+    async function handleRequestOTP(e, role) {
+      e.preventDefault();
+
+      if (role === 'customer') {
+        await triggerOTP({
+          role: 'customer',
+          full_name: document.getElementById('cust-name').value.trim(),
+          phone: document.getElementById('cust-tel').value.trim(),
+          password: document.getElementById('cust-pass').value,
+          photo_url: ''
+        });
+      } else {
+        const langs = Array.from(document.querySelectorAll('input[name="tech-lang"]:checked')).map(cb => cb.value);
+        const fileInput = document.getElementById('tech-photo');
+
+        const proceedTech = async (photoBase64) => {
+          await triggerOTP({
+            role: 'technician',
+            full_name: document.getElementById('tech-name').value.trim(),
+            phone: document.getElementById('tech-tel').value.trim(),
+            password: document.getElementById('tech-pass').value,
+            skill_level: document.getElementById('tech-level').value,
+            province: document.getElementById('tech-province').value,
+            district: document.getElementById('tech-district').value.trim(),
+            location_desc: document.getElementById('tech-location-desc').value.trim(),
+            languages: langs.length ? langs : ['Kinyarwanda'],
+            photo_url: photoBase64
+          });
+        };
+
+        if (fileInput.files && fileInput.files[0]) {
+          const reader = new FileReader();
+          reader.onload = (ev) => proceedTech(ev.target.result);
+          reader.readAsDataURL(fileInput.files[0]);
+        } else {
+          await proceedTech('');
+        }
+      }
+    }
+
+    async function triggerOTP(payload) {
+      pendingRegistrationData = payload;
+      try {
+        const res = await fetch('/api/send-otp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ phone: payload.phone })
+        });
+        const data = await res.json();
+        if (!res.ok) return alert(data.error || 'Could not generate verification code.');
+
+        document.getElementById('form-register-customer').classList.add('hidden');
+        document.getElementById('form-register-tech').classList.add('hidden');
+        document.getElementById('otp-verification-box').classList.remove('hidden');
+        document.getElementById('otp-target-phone').innerText = payload.phone;
+        document.getElementById('otp-display-code').innerText = data.demo_code;
+      } catch (err) {
+        alert('Server error while generating verification code.');
+      }
+    }
+
+    async function completeAccountCreation() {
+      const otp = document.getElementById('otp-input').value.trim();
+      if (!otp) return alert('Please enter the 6-digit verification code.');
+
+      try {
+        const res = await fetch('/api/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ...pendingRegistrationData, otp })
+        });
+        const data = await res.json();
+        if (!res.ok) return alert(data.error || 'Verification failed.');
+
+        authToken = data.token;
+        currentUser = data.user;
+        localStorage.setItem('rge_token', authToken);
+        localStorage.setItem('rge_user', JSON.stringify(currentUser));
+
+        document.getElementById('otp-verification-box').classList.add('hidden');
+        document.getElementById('otp-input').value = '';
+        updateAuthUI();
+        loadStats();
+        closeAuthModal();
+        alert('Account verified and created! Welcome to RGE Services.');
+        navigate('services');
+      } catch (err) {
+        alert('Server error during verification.');
+      }
+    }
+
+    async function handleLogin(e) {
+      e.preventDefault();
+      const phone = document.getElementById('login-tel').value.trim();
+      const password = document.getElementById('login-pass').value;
+
+      try {
+        const res = await fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ phone, password })
+        });
+        const data = await res.json();
+        if (!res.ok) return alert(data.error || 'Login failed.');
+
+        authToken = data.token;
+        currentUser = data.user;
+        localStorage.setItem('rge_token', authToken);
+        localStorage.setItem('rge_user', JSON.stringify(currentUser));
+
+        updateAuthUI();
+        closeAuthModal();
+        navigate(currentUser.role === 'admin' ? 'admin' : 'services');
+      } catch (err) {
+        alert('Server connection failed.');
+      }
+    }
+
+    function logout() {
+      authToken = null;
+      currentUser = null;
+      localStorage.removeItem('rge_token');
+      localStorage.removeItem('rge_user');
+      updateAuthUI();
+      navigate('home');
+    }
+
+    function updateAuthUI() {
+      const statusDiv = document.getElementById('auth-status');
+      const adminBtn = document.getElementById('nav-admin-btn');
+
+      if (currentUser) {
+        statusDiv.innerHTML = `
+          <span class="text-xs text-amber-400 font-semibold hidden sm:inline">Welcome, ${currentUser.full_name}</span>
+          <button onclick="logout()" class="bg-slate-700 hover:bg-red-600 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition">Logout</button>
+        `;
+        if (currentUser.role === 'admin') {
+          adminBtn.classList.remove('hidden');
+        } else {
+          adminBtn.classList.add('hidden');
+        }
+      } else {
+        statusDiv.innerHTML = `
+          <button onclick="openAuthModal('login')" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-1.5 rounded-lg text-sm transition">Login</button>
+        `;
+        adminBtn.classList.add('hidden');
+      }
+    }
+
+    function openApplyModal(serviceId) {
+      selectedService = servicesData.find(s => s.id === serviceId);
+      document.getElementById('apply-service-title').innerText = selectedService.title;
+      document.getElementById('apply-service-cost').innerText = "Estimated Cost: " + selectedService.cost;
+
+      if (currentUser) {
+        document.getElementById('app-name').value = currentUser.full_name || '';
+        document.getElementById('app-tel').value = currentUser.phone || '';
+      }
+
+      document.getElementById('apply-modal').classList.remove('hidden');
+      document.getElementById('apply-modal').classList.add('flex');
+    }
+
+    function closeApplyModal() {
+      document.getElementById('apply-modal').classList.add('hidden');
+      document.getElementById('apply-modal').classList.remove('flex');
+    }
+
+    async function submitAndSendWhatsApp(e) {
+      e.preventDefault();
+      const payload = {
+        service_name: selectedService.title,
+        customer_name: document.getElementById('app-name').value.trim(),
+        customer_phone: document.getElementById('app-tel').value.trim(),
+        province_district: document.getElementById('app-district').value.trim(),
+        sector: document.getElementById('app-sector').value.trim(),
+        village_details: document.getElementById('app-village').value.trim(),
+        description: document.getElementById('app-desc').value.trim()
+      };
+
+      try {
+        await fetch('/api/apply-service', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+      } catch (err) {
+        console.error('Could not log request:', err);
+      }
+
+      const targetNumber = document.getElementById('app-whatsapp-target').value;
+      const message = `*NEW SERVICE REQUEST - RGE SERVICES*%0A` +
+        `----------------------------------%0A` +
+        `*Service:* ${payload.service_name}%0A` +
+        `*Estimated Cost:* ${selectedService.cost}%0A` +
+        `*Customer Name:* ${payload.customer_name}%0A` +
+        `*Telephone:* ${payload.customer_phone}%0A` +
+        `*Province/District:* ${payload.province_district}%0A` +
+        `*Sector:* ${payload.sector}%0A` +
+        `*Village/Location:* ${payload.village_details}%0A` +
+        `*Description:* ${payload.description}`;
+
+      window.open(`https://wa.me/${targetNumber}?text=${message}`, '_blank');
+      closeApplyModal();
+    }
+
+    updateAuthUI();
+    loadStats();
+    renderServices();
+  </script>
+</body>
+</html>
